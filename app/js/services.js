@@ -3484,7 +3484,7 @@ angular.module('myApp.services', ['myApp.i18n', 'izhukov.utils'])
           sendUpdateStatusReq(true)
         }, 5000)
       } else {
-        sendUpdateStatusReq(false)
+        sendUpdateStatusReq(true)
         toPromise = $timeout(checkIDLE, 60000)
       }
     }
