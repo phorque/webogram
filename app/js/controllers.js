@@ -1525,7 +1525,9 @@ angular.module('myApp.controllers', ['myApp.i18n'])
         $scope.$broadcast('ui_history_change')
 
         if (!$rootScope.idle.isIDLE) {
-          AppMessagesManager.readHistory($scope.curDialog.peerID)
+          if (AppPeersManager.isChannel($scope.curDialog.peerID) || AppPeersManager.isMegagroup($scope.curDialog.peerID)) {
+            AppMessagesManager.readHistory($scope.curDialog.peerID);
+          }
         }
 
         updateBotActions()
@@ -1976,7 +1978,9 @@ angular.module('myApp.controllers', ['myApp.i18n'])
           }
         } else {
           $timeout(function () {
-            AppMessagesManager.readHistory($scope.curDialog.peerID)
+            if (AppPeersManager.isChannel($scope.curDialog.peerID) || AppPeersManager.isMegagroup($scope.curDialog.peerID)) {
+              AppMessagesManager.readHistory($scope.curDialog.peerID);
+            }
           })
         }
 
@@ -2074,7 +2078,9 @@ angular.module('myApp.controllers', ['myApp.i18n'])
             }
           } else {
             $timeout(function () {
-              AppMessagesManager.readHistory($scope.curDialog.peerID)
+              if (AppPeersManager.isChannel($scope.curDialog.peerID) || AppPeersManager.isMegagroup($scope.curDialog.peerID)) {
+                AppMessagesManager.readHistory($scope.curDialog.peerID);
+              }
             })
           }
 
@@ -2166,7 +2172,9 @@ angular.module('myApp.controllers', ['myApp.i18n'])
           $scope.curDialog.peerID &&
           !$scope.historyFilter.mediaType &&
           !$scope.historyState.skipped) {
-        AppMessagesManager.readHistory($scope.curDialog.peerID)
+            if (AppPeersManager.isChannel($scope.curDialog.peerID) || AppPeersManager.isMegagroup($scope.curDialog.peerID)) {
+              AppMessagesManager.readHistory($scope.curDialog.peerID);
+            }
       }
       if (!newVal) {
         unreadAfterIdle = false
@@ -2190,7 +2198,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
     $scope.$on('reply_selected', function (e, messageID) {
       replySelect(messageID, true)
     })
-    $scope.$on('ui_typing', onTyping)
+    // $scope.$on('ui_typing', onTyping)
 
     $scope.draftMessage = {
       text: '',
@@ -2247,6 +2255,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 
     function sendMessage (e) {
       $scope.$broadcast('ui_message_before_send')
+      AppMessagesManager.readHistory($scope.curDialog.peerID)
 
       $timeout(function () {
         var text = $scope.draftMessage.text
@@ -2591,7 +2600,9 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 
       if (newVal && newVal.length) {
         if (!$scope.historyFilter.mediaType && !$scope.historyState.skipped) {
-          AppMessagesManager.readHistory($scope.curDialog.peerID)
+          if (AppPeersManager.isChannel($scope.curDialog.peerID) || AppPeersManager.isMegagroup($scope.curDialog.peerID)) {
+            AppMessagesManager.readHistory($scope.curDialog.peerID)
+          }
         }
       }
       if ($scope.curDialog.peerID) {

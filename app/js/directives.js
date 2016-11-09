@@ -1579,6 +1579,7 @@ angular.module('myApp.directives', ['myApp.filters'])
         $timeout(function () {
           updateValue()
           $scope.draftMessage.send()
+
           composer.resetTyping()
           if (composerEmojiPanel) {
             composerEmojiPanel.update()
