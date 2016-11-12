@@ -4520,10 +4520,10 @@ angular.module('myApp.services', ['myApp.i18n', 'izhukov.utils'])
 
       if ('registerProtocolHandler' in navigator) {
         try {
-          navigator.registerProtocolHandler('tg', '#im?tgaddr=%s', 'Telegram Web')
+          navigator.registerProtocolHandler('tg', '#im?tgaddr=%s', 'Telegras')
         } catch (e) {}
         try {
-          navigator.registerProtocolHandler('web+tg', '#im?tgaddr=%s', 'Telegram Web')
+          navigator.registerProtocolHandler('web+tg', '#im?tgaddr=%s', 'Telegras')
         } catch (e) {}
       }
 
